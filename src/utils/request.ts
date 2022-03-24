@@ -21,7 +21,9 @@ install.interceptors.request.use(config => {
  * 响应拦截器
  */
 install.interceptors.response.use(response => {
-  console.log('response', response)
+  if (response.status === 200) {
+    return Promise.resolve(response.data) 
+  }
   return response
 },error => {
   console.log('error', error)

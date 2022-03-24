@@ -5,9 +5,13 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Aside: typeof import('./src/components/aside/index.vue')['default']
+    DefineEmitsCom: typeof import('./src/components/defineEmits-com/index.vue')['default']
+    DefinePropsCom: typeof import('./src/components/defineProps-com/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMain: typeof import('element-plus/es')['ElMain']

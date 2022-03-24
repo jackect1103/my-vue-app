@@ -21,16 +21,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-const count = ref(0)
+import { ref ,Ref} from 'vue'
+const count:Ref<number> = ref(0)
 console.log(count.value) // 0
 
 count.value++
 console.log(count.value) // 1
 
+// 在调用 ref() 时传入一个泛型参数，来覆盖默认的推导行为
+// 得到的类型：Ref<string | number>
+const year = ref<string | number>('2020')
+year.value = 2020 // 成功！
 
-
-let person = ref({
+let person:Ref<{
+  name:string,
+  age?:number,
+}> = ref({
   name:'jackect',
   age:18
 })

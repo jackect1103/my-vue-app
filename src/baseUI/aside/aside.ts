@@ -46,6 +46,19 @@ const asidebar:Array = [{
   label:'pinia(状态管理工具)',
   path:'/pinia',
   children:[]
+},{
+  id:'6',
+  label:'prop-emit',
+  path:'/prop-emit',
+},{
+  id:'7',
+  label:'学习typescript',
+  path:'/typescript',
+  children:[{
+    id:'7-1',
+    label:'base-type',
+    path:'/typescript/base-type'
+  }]
 }]
 
 export default asidebar

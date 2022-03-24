@@ -7,8 +7,11 @@
 
 <script lang="ts" setup>
 import {ref,reactive} from 'vue'
-const count = ref(1)
-const obj = reactive({ count })
+const count = ref<number>(1)
+interface obj {
+  count:number
+}
+const obj:obj = reactive({ count })
 
 
 // ref 会被解包

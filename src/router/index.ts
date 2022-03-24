@@ -4,6 +4,7 @@ import listenApiRouter from '@/router/listen-api-router'
 
 
 
+const Axios = () => import('views/axios-test/index.vue')
 const vueRouter = () => import('views/vue-router/index.vue')
 const Pinia = () => import('views/pinia/index.vue')
 
@@ -11,7 +12,11 @@ const routes:Array<RouteRecordRaw> = [
   
   ...baseApiRouter,
   ...listenApiRouter,
-
+  {
+    path:'/axios',
+    name: 'Axios', 
+    component: Axios
+  },
   {
     path:'/vue-router',
     name: 'vueRouter', 

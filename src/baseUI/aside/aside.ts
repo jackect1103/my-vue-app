@@ -35,10 +35,14 @@ const asidebar:Array = [{
   }]
 },{
   id:'3',
+  label:'axios',
+  path:'/axios'
+},{
+  id:'4',
   label:'vue-router',
   path:'/vue-router',
 },{
-  id:'4',
+  id:'5',
   label:'pinia(状态管理工具)',
   path:'/pinia',
   children:[]

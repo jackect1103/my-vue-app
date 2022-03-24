@@ -29,7 +29,16 @@ export default defineConfig({
     port:4000, // 设置服务启动端口号，如果端口已经被使用，Vite 会自动尝试下一个可用的端口
     open: true, // boolean | string 设置服务启动时是否自动打开浏览器，当此值为字符串时，会被用作 URL 的路径名
     cors: true, // 为开发服务器配置 CORS，配置为允许跨域
-
+    proxy:{
+      //这里是通过请求/api 来转发到 https://api.pingping6.com/
+      //假如你要请求https://api.*.com/a/a
+      //那么axios的url，可以配置为 /api/a/a
+      '/api': {
+        target:'http://localhost:3000',
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      
+    }
   },
 
   // 别名 resolve.alias

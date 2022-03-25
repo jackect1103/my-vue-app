@@ -12,7 +12,7 @@
         v-for="item in shopListColumn"
         :key="item.id"
         fixed
-        :prop="item.label"
+        :prop="item.type"
         :label="item.label"
         :width="item.width"
       />
@@ -25,7 +25,7 @@
           <el-button
             type="text"
             size="small"
-            @click.prevent="deleteRow(scope.$index)"
+            @click.prevent="deleteRowHandle(scope.$index)"
           >
             Remove
           </el-button>
@@ -35,7 +35,7 @@
     <el-button
       class="mt-4"
       style="width: 100%"
-      @click="onAddItem"
+      @click="onAddItemHandle"
     >
       Add Item
     </el-button>
@@ -43,11 +43,22 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, reactive, Ref} from 'vue'
 import useBaseType from '@/hooks/useBaseType'
+
 const {
   shopListColumn,
-  tableData
+  getTableListHandle,
+  onAddItemHandle,
+  deleteRowHandle
 } = useBaseType()
+
+const total: Ref<number> = ref(0)
+let tableData = reactive([])
+const res = await  getTableListHandle()
+total.value = res.data.total
+tableData = res.data.data
+
 
 </script>
 

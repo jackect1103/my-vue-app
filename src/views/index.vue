@@ -9,7 +9,9 @@
           <Aside />
         </el-aside>
         <el-main>
-          <router-view />
+          <suspense>
+            <router-view />
+          </suspense>
         </el-main>
       </el-container>
     </el-container>

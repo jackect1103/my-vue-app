@@ -23,7 +23,6 @@ for (let i = 0; i < 100; i++) {
 }
 export default {
   getList: (params: any) => { 
-    console.log('params', params)
     const info = JSON.parse(params.body);
     const [index, size, total] = [info.pageIndex - 1, info.pageSize, dataList.length]
     const len: any = total / size

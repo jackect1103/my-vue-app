@@ -1,8 +1,17 @@
 import axios from 'axios'
+/**
+ * vite使用process必须采用这种方式
+ * import.meta.env
+ */
+console.log('import.meta.env.VITE_APP_BASE_API',import.meta.env)
 
-
+const process = import.meta.env
+const baseURL:string | boolean  |undefined = (!process.DEV && process.VITE_OPEN_PROXY === 'true')
+  ? process.VITE_APP_API_BASEURL  
+  : '/api' 
+console.log('baseURL', baseURL)
 const install = axios.create({
-  baseURL:'/api',
+  baseURL,
   timeout:20000
 })
 
@@ -41,5 +50,6 @@ function request (params:any){
       })
   })
 }
+
 
 export default request

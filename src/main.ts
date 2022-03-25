@@ -4,8 +4,9 @@ import router from './router/index'
 
 
 
-const app = createApp(App)
 
+
+const app = createApp(App)
 app.use(router)
 // router.onReady() 已经替换为 router.isReady()
 // 不带任何参数并返回 Promise

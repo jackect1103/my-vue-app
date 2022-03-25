@@ -24,12 +24,15 @@
       <li>类型断言</li>
     </ol>
   </el-card>
-</template>
+  
+  <el-divider />
+
+  <shoppingCart />
+</template> 
 
 <script lang="ts" setup>
-import useBaseType from '@/hooks/useBaseType/index.ts'
-const usebasetype = useBaseType()
-console.log('usebasetype', usebasetype)
+import shoppingCart from 'components/shoppingCart-com/index.vue'
+
 </script>
 
 <style lang="scss" scoped>

@@ -49,6 +49,7 @@ export default defineConfig({
       components: pathResolve('./src/components'),
       assets: pathResolve('./src/assets'),
     },
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },
 
   // 构建选项 build

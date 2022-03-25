@@ -4,19 +4,21 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Aside: typeof import('./src/components/aside/index.vue')['default']
+    DefinePropsCom: typeof import('./src/components/defineProps-com/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    Header: typeof import('./src/components/header/index.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ShoppingCartCom: typeof import('./src/components/shoppingCart-com/index.vue')['default']
   }
 }
 

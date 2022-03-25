@@ -35,13 +35,30 @@ const asidebar:Array = [{
   }]
 },{
   id:'3',
+  label:'axios',
+  path:'/axios'
+},{
+  id:'4',
   label:'vue-router',
   path:'/vue-router',
 },{
-  id:'4',
+  id:'5',
   label:'pinia(状态管理工具)',
   path:'/pinia',
   children:[]
+},{
+  id:'6',
+  label:'prop-emit',
+  path:'/prop-emit',
+},{
+  id:'7',
+  label:'学习typescript',
+  path:'/typescript',
+  children:[{
+    id:'7-1',
+    label:'base-type',
+    path:'/typescript/base-type'
+  }]
 }]
 
 export default asidebar

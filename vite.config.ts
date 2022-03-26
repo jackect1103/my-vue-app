@@ -34,7 +34,7 @@ export default defineConfig({
       //假如你要请求https://api.*.com/a/a
       //那么axios的url，可以配置为 /api/a/a
       '/api': {
-        target:'http://localhost:3000',
+        target:'http://localhost:10086',
         rewrite: (path) => path.replace(/^\/api/, '')
       },
       

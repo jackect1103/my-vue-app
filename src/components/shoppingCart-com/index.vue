@@ -4,7 +4,7 @@
   </div>
   <el-card class="box-card">
     <el-table
-      :data="tableData"
+      :data="tableData.data"
       style="width: 100%"
       max-height="250"
     >
@@ -25,7 +25,7 @@
           <el-button
             type="text"
             size="small"
-            @click.prevent="deleteRowHandle(scope.$index)"
+            @click.prevent="openDialog(scope.$index)"
           >
             Remove
           </el-button>
@@ -40,26 +40,65 @@
       Add Item
     </el-button>
   </el-card>
+
+  <teleport to="body">
+    <el-dialog
+      v-model="dialogVisible"
+      title="Tips"
+      width="30%"
+      :before-close="closeDialog"
+    >
+      <span>{{ dialogText }}</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="closeDialog">取消</el-button>
+          <el-button
+            type="primary"
+            @click="removeHasndle"
+          >确认</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  </teleport>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, Ref} from 'vue'
 import useBaseType from '@/hooks/useBaseType'
+import useElDialog from '@/hooks/useElDialog'
 
 const {
   shopListColumn,
+  tableData,
   getTableListHandle,
   onAddItemHandle,
   deleteRowHandle
-} = useBaseType()
+} = useBaseType();
 
-const total: Ref<number> = ref(0)
-let tableData = reactive([])
-const res = await  getTableListHandle()
-total.value = res.data.total
-tableData = res.data.data
+const {
+  dialogText,
+  dialogVisible,
+  curId,
+
+  closeDialog,
+  openDialog,
+} = useElDialog('是否删除当前该商品信息')
+getTableListHandle()
 
 
+
+const removeHasndle = async () => {
+  let res = await deleteRowHandle(curId.value)
+  if (res.message.includes('成功')) {
+    closeDialog()
+    getTableListHandle()
+  } else {
+    ElMessage({
+      message: res.message,
+      type: 'warning',
+    })
+  }
+  
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -2,8 +2,7 @@
 import Koa from 'koa'
 import bodyparser from 'koa-bodyparser'
 const app = new Koa()
-const PORT = 3000 ;
-console.log('bodyparser', bodyparser)
+const PORT = 10086 ;
 app.use(bodyparser())
 
 

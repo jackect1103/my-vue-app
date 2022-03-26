@@ -72,9 +72,9 @@ class ShopListController{
   }
 
   delete (ctx,next){
-    const info = ctx.query;
+    const info = ctx.request.body;
     let body = {}
-    if (info.id) {
+    if (Object.keys(info).length !== 0) {
       this.dataList.splice(info.id, 1);
       body = {
         'code':0,

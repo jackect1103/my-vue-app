@@ -28,10 +28,6 @@ export default function useBaseType(){
     label:'地址',
     type:'Address',
     width:250
-  },{
-    id:5,
-    label:'图片',
-    type:'image',
   }]
 
   const pageIndex = ref(1)

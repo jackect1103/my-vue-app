@@ -4,13 +4,17 @@ class ShopListController{
   constructor(){
     this.dataList = []
     for (let i = 0; i < 100; i++) {
+      let name = Random.cname()
       this.dataList.push({
         id: i,
-        name: Random.cname(),
+        name,
         Date: Random.date('yyyy-MM-dd') ,
         price: Random.integer(10,1000),
         Address: Random.city(true),
-        image:Random.image('200x100', '#4A7BF7')
+        image:Random.image('160×160', Mock.Random.color(), '#fda100', name).replace(
+          '×',
+          'x'
+        )
       })
     }
   }
@@ -93,6 +97,16 @@ class ShopListController{
       }
     }
     ctx.body = body
+  }
+
+  upload (ctx,next){
+    const { name, path: filePath, size, type } = ctx.request.files.file
+    ctx.body = {
+      name, // 文件名称
+      filePath, // 临时路径
+      size, // 文件大小
+      type // 文件类型
+    }
   }
 }
 

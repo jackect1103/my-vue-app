@@ -8,6 +8,14 @@ export function getTableList (params:any):Promise<any>{
   })
 }
 
+export function addProductItem(params: any): Promise<any> {
+  return request({
+    url: '/shopList/addProduct',
+    method: 'post',
+    data: params
+  })
+}
+
 export function deleteTableList(params: any): Promise<any> {
   return request({
     url: '/shopList/delete',
@@ -15,6 +23,7 @@ export function deleteTableList(params: any): Promise<any> {
     data: params
   })
 }
+
 export function updateTableList(params: any): Promise<any> {
   return request({
     url: '/shopList/update',

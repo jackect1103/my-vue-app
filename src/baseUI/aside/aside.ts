@@ -1,5 +1,5 @@
 
-const asidebar:Array = [{
+const asidebar = [{
   id:'1',
   label:'基础api',
   path:'/base-api',

@@ -40,6 +40,23 @@ class ShopListController{
     }
   }
   
+  addItem(ctx) {
+    const body = ctx.request.body
+    if (Object.keys(body).length > 0) {
+      body.id = this.dataList.length 
+      this.dataList.unshift(body)
+      ctx.body = {
+        'code':0,
+        'data':body,
+        "message": "添加商品成功!",
+        "msg": "OK!",
+        "subCode": null,
+        "subMsg": null
+      }
+    }
+
+  }
+
   update(ctx,next) {
     const info = ctx.query;
     let curItem = {};

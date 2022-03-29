@@ -4,7 +4,7 @@
 
 
 <script lang="ts" setup>
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
 
 request({
   url: '/card',

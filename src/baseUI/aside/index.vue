@@ -5,9 +5,6 @@
     class="el-menu-vertical-demo"
     default-active="1"
     text-color="#fff"
-    router
-    @open="handleOpen"
-    @close="handleClose"
   >
     <template
       v-for="item in asidebar"
@@ -28,6 +25,7 @@
           v-for="child in item.children"
           :key="child.id"
           :index="child.path"
+          @click="navigateTo(child.path)"
         >
           {{ child.label }}
         </el-menu-item>
@@ -36,6 +34,7 @@
       <el-menu-item
         v-else
         :index="item.path"
+        @click="navigateTo(item.path)"
       >
         <el-icon><IconMenu /></el-icon>
         <span>{{ item.label }}</span>
@@ -45,16 +44,18 @@
 </template>
 
 <script lang="ts" setup>
+import {useRouter,useRoute} from 'vue-router'
 import asidebar from './aside'
 import {
-  Location,
+  Location, 
   Menu as IconMenu,
 } from '@element-plus/icons-vue'
-const handleOpen = (key: string, keyPath: string[]) => {
-  // console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  // console.log(key, keyPath)
+let router = useRouter()
+let route = useRoute()
+
+console.log('useRouter', useRouter,router,route)
+const navigateTo = (path:string) => {
+  router.push(path)
 }
 
 </script>

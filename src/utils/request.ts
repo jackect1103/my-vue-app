@@ -6,12 +6,12 @@ import axios from 'axios'
 console.log('import.meta.env.VITE_APP_BASE_API',import.meta.env)
 
 const process = import.meta.env
-const baseURL:string | boolean  |undefined = (!process.DEV && process.VITE_OPEN_PROXY === 'true')
-  ? process.VITE_APP_API_BASEURL  
+const baseURL:string = (!process.DEV && process.VITE_OPEN_PROXY === 'true')
+  ? process.VITE_APP_API_BASEURL  +''
   : '/api' 
 console.log('baseURL', baseURL)
 const install = axios.create({
-  baseURL,
+  baseURL:baseURL,
   timeout:20000
 })
 

@@ -88,20 +88,25 @@
         ref="ruleFormRef"
         :model="productInfos"
         :rules="productRules"
-        label-width="100px"
-        class="demo-ruleForm"
+        label-width="150px"
       >
         <el-form-item
           label="商品名称："
           prop="name"
         >
-          <el-input v-model="productInfos.name" />
+          <el-input
+            v-model="productInfos.name"
+            placeholder="商品名称"
+          />
         </el-form-item>
         <el-form-item
           label="商品价格："
           prop="price"
         >
-          <el-input v-model="productInfos.price" />
+          <el-input
+            v-model="productInfos.price"
+            placeholder="商品价格"
+          />
         </el-form-item>
         <el-form-item
           label="商品日期："
@@ -110,14 +115,17 @@
           <el-date-picker
             v-model="productInfos.Date"
             type="date"
-            placeholder="商品日期"
+            placeholder="商品生产日期"
           />
         </el-form-item>
         <el-form-item
-          label="商品地址："
+          label="商品生产地址："
           prop="Address"
         >
-          <el-input v-model="productInfos.Address" />
+          <el-input
+            v-model="productInfos.Address"
+            placeholder="商品生产地址"
+          />
         </el-form-item>
         <el-form-item
           label="商品图片："
@@ -148,7 +156,7 @@
           <el-button @click="closeProductDialog">取消</el-button>
           <el-button
             type="primary"
-            @click="addProductHasndle"
+            @click="addProduct"
           >确认</el-button>
         </span>
       </template>
@@ -158,10 +166,11 @@
 
 <script lang="ts" setup>
 import { Plus } from '@element-plus/icons-vue'
-import {ref,Ref} from 'vue'
 import useBaseType from '@/hooks/useBaseType'
 import useElDialog from '@/hooks/useElDialog'
 import useProduct from '@/hooks/useProduct'
+import {PRODUCT_RULE} from '@/contant-type/index'
+// import { ElMessage } from 'element-plus'
 
 const {
   shopListColumn,
@@ -181,14 +190,22 @@ const {
 } = useElDialog('是否删除当前该商品信息')
 getTableListHandle()
 
+
 const {
+  ruleFormRef,
   productVisible,
   productInfos,
   productRules,
 
   closeProductDialog,
   addProductHasndle
-} = useProduct()
+} = useProduct({
+  name:'',
+  price:'',
+  Date:'',
+  Address:'',
+  image:'',
+},PRODUCT_RULE)
 
 /**
  * 添加商品信息
@@ -196,15 +213,20 @@ const {
 const addProductHandle = (e:Event) => {
   productVisible.value = true
 }
+const addProduct = async () => {
+  let res = await addProductHasndle(ruleFormRef.value)
+  if (res) {
+    await onAddItemHandle(productInfos)
+    productVisible.value = false
+  }
+}
 
 
 const handleAvatarSuccess= (
   response,
   uploadFile
 ) => {
-  console.log('uploadFile.raw', uploadFile.raw)
   productInfos.image = URL.createObjectURL(uploadFile.raw!)
-  console.log('productInfos', productInfos)
 }
 
 
@@ -219,14 +241,15 @@ const removeHasndle = async () => {
     closeDialog()
     getTableListHandle()
   } else {
-    ElMessage({
-      message: res.message,
-      type: 'warning',
-    })
+    // ElMessage({
+    //   message: res.message,
+    //   type: 'warning',
+    // })
   }
   
 }
 </script>
+
 
 <style scoped>
 .avatar-uploader .avatar {
@@ -234,9 +257,6 @@ const removeHasndle = async () => {
   height: 178px;
   display: block;
 }
-</style>
-
-<style>
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -256,5 +276,12 @@ const removeHasndle = async () => {
   width: 178px;
   height: 178px;
   text-align: center;
+}
+/deep/ .el-input,
+/deep/ .el-input__inner{
+  width:100%;
+}
+/deep/ .el-upload {
+  border:1px solid #ccc;
 }
 </style>

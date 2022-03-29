@@ -1,5 +1,5 @@
 import {ref,reactive} from 'vue'
-import {getTableList,deleteTableList,updateTableList} from '@/api/shopList-api'
+import {getTableList,deleteTableList,addProductItem} from '@/api/shopList-api'
 interface shopListColumn {
   id:number,
   label:string,
@@ -50,7 +50,7 @@ export default function useBaseType(){
    * 获取商品信息
    * @returns 
    */
-  const getTableListHandle = async ():void => {
+  const getTableListHandle = async ():Promise<void> => {
     const res= await getTableList(params)
     tableData.total = res.data.total
     tableData.data = res.data.data
@@ -58,7 +58,11 @@ export default function useBaseType(){
 
 
   const onAddItemHandle = (item) => {
-    console.log('onAddItem',item)
+    return new Promise(async resolve => {
+      const res = await addProductItem(item)
+      resolve(res)
+      getTableListHandle()
+    })
   }
   
   const deleteRowHandle = async (id:string):Promise<any> => {

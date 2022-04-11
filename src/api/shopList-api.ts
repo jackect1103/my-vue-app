@@ -1,33 +1,33 @@
 import request from "@/utils/request"
 
-export function getTableList (params:any):Promise<any>{
+export function getTableList (data:any):Promise<any>{
   return request({
     url: '/shopList/getList',
     method: 'post',
-    data: params
+    data
   })
 }
 
-export function addProductItem(params: any): Promise<any> {
+export function addProductItem(data: any): Promise<any> {
   return request({
     url: '/shopList/addProduct',
     method: 'post',
-    data: params
+    data
   })
 }
 
-export function deleteTableList(params: any): Promise<any> {
+export function deleteTableList(data: any): Promise<any> {
   return request({
     url: '/shopList/delete',
     method: 'post',
-    data: params
+    data
   })
 }
 
-export function updateTableList(params: any): Promise<any> {
+export function updateTableList(data: any): Promise<any> {
   return request({
     url: '/shopList/update',
     method: 'post',
-    data: params
+    data
   })
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom">
+  <div class="bottom"> 
     购物车
   </div>
   <el-card class="box-card">

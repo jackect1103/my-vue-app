@@ -20,7 +20,6 @@ const install = axios.create({
  * 请求拦截器
  */
 install.interceptors.request.use(config => {
-  console.log('config', config)
   return config
 },error => {
   console.log('error', error)

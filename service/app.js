@@ -4,6 +4,10 @@ import path from 'path';
 import KoaStatic from 'koa-static'
 import koaBody  from 'koa-body'
 
+// 接口
+import loginRouter from './router/login/index.js'
+import shopListRouter from './router/shopList/index.js'
+
 const __dirname = path.resolve();
 // 处理POST请求参数
 const app = new Koa()
@@ -29,8 +33,8 @@ app.use(koaBody({
 
 
 
-import shopListRouter from './router/shopList/index.js'
 app.use(shopListRouter.routes()).use(shopListRouter.allowedMethods())// 允许http请求的所有方法
+app.use(loginRouter.routes()).use(loginRouter.allowedMethods())// 允许http请求的所有方法
 
 
 app.listen(PORT,() => {

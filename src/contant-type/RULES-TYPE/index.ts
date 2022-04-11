@@ -5,3 +5,6 @@ export const PRODUCT_RULE = {
   Address: [{ required: true, message: '请输入商品生产地址', trigger: 'blur' }],
   image: [{ required: true, message: '请选择商品图片', trigger: 'blur' }],
 }
+
+
+

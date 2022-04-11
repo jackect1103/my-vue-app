@@ -52,6 +52,7 @@ npm install koa
 
   app.listen(3000);
   ```
+
 ### 后台服务启动
 
 - 可以安装nodemon库可以实时监听项目文件的变动，同时也不需要一直去启动项目
@@ -59,6 +60,16 @@ npm install koa
 ```js
 npm run start
 ```
+
+
+### 用sequelize来操作数据库，同时安装mysql、mysql2
+```js
+cnpm install sequelize mysql mysql2 --save
+```
+
+> Sequelize 是一个基于 promise 的 Node.js ORM, 目前支持 Postgres, MySQL, MariaDB, SQLite 以及 Microsoft SQL Server. 它具有强大的事务支持, 关联关系, 预读和延迟加载,读取复制等功能。
+
+> Sequelize 遵从 语义版本控制。 支持 Node v10 及更高版本以便使用 ES6 功能。
 
 
 ### 可以使用脚手架的方式创建项目

@@ -1,5 +1,6 @@
-import {PRODUCT_RULE} from './RULES-TYPE/index'
+import {PRODUCT_RULE,REGISTER_RULE} from './RULES-TYPE/index'
 
 export {
-  PRODUCT_RULE
+  PRODUCT_RULE,
+  REGISTER_RULE
 }

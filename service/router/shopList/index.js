@@ -4,6 +4,9 @@ const shopListRouter = new KoaRouter()
 
 import shopListController from '../../controller/shopList/index.js'
 
+// 登录
+shopListRouter.post('/shopList/getList', shopListController.getList.bind(shopListController));
+
 
 shopListRouter.post('/shopList/getList', shopListController.getList.bind(shopListController));
 shopListRouter.post('/shopList/addProduct', shopListController.addItem.bind(shopListController));

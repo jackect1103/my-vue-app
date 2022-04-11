@@ -6,10 +6,6 @@ const TOREF = () => import('views/base-api/toRef/index.vue')
 const TORAW = () => import('views/base-api/toRaw/index.vue')
 
 const baseApiRouter:Array<RouteRecordRaw> = [{
-  path:'/',
-  name: '/', 
-  redirect: { name: 'REF' }
-},{
   path: '/base-api/ref', 
   name: 'REF', 
   component: REF,

@@ -25,15 +25,14 @@
       <li>Object</li>
       <li>类型断言</li>
     </ol>
-  </el-card>
+  </el-card> 
   
   <el-divider />
 
-  <shoppingCart />
+ 
 </template> 
 
 <script lang="ts" setup>
-import shoppingCart from 'components/shoppingCart-com/index.vue'
 
 </script>
 

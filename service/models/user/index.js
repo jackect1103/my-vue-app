@@ -1,5 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
-  console.log('sequelize,DataTypes', sequelize, DataTypes)
+const userModel = function (sequelize, DataTypes) {
 
   return sequelize.define('user', {
     id: {
@@ -7,6 +6,11 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       allowNull: true,
       autoIncrement: true
+    },
+    userid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'userid'
     },
     username: {
       type: DataTypes.STRING,
@@ -20,6 +24,9 @@ module.exports = function (sequelize, DataTypes) {
     }
   },
   {
-      timestamps: false
+    timestamps: false
   })
+}
+export {
+  userModel
 }

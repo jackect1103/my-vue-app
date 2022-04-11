@@ -8,7 +8,13 @@
         </div>
       </template>
       <!-- 表身 -->
-      <el-form ref="ruleFormRef" label-width="100px" :rules="registerRule" :model="loginForm" style="max-width: 460px">
+      <el-form
+        ref="ruleFormRef"
+        label-width="100px"
+        :rules="registerRule"
+        :model="loginForm"
+        style="max-width: 460px"
+      >
         <el-form-item label="用户名:" prop="userName">
           <el-input v-model="loginForm.userName" />
         </el-form-item>
@@ -19,66 +25,75 @@
           <el-input v-model="loginForm.rePassword" type="password" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)">注册用户</el-button>
+          <el-button type="primary" @click="submitForm(ruleFormRef)"
+            >注册用户</el-button
+          >
           <el-button @click="resetForm(ruleFormRef)">重置</el-button>
         </el-form-item>
       </el-form>
-    </el-card>  </div>
+    </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
-import type { FormInstance } from 'element-plus'
-import { register } from '@/api/common-api'
-import { useRouter } from 'vue-router'
+import { ref, reactive } from "vue";
+import type { FormInstance } from "element-plus";
+import  { ElMessage } from "element-plus";
+import { register } from "@/api/common-api";
+import { useRouter } from "vue-router";
 
-let router = useRouter()
-let ruleFormRef = ref<FormInstance>(null)
+let router = useRouter();
+let ruleFormRef = ref<FormInstance>(null);
 // 自定义校验规则
-let checkoutPassword = (rule,value,callback) => {
+let checkoutPassword = (rule, value, callback) => {
   if (loginForm.password == value) {
-    callback()
+    callback();
   } else {
-    callback('密码不一致')
+    callback("密码不一致");
   }
-}
+};
 let registerRule = reactive({
-  userName: [{ required: true, message: '请输入用户名称', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入用户密码', trigger: 'blur' }],
+  userName: [{ required: true, message: "请输入用户名称", trigger: "blur" }],
+  password: [{ required: true, message: "请输入用户密码", trigger: "blur" }],
   rePassword: [
-    { required: true, message: '请输入用户重复密码', trigger: 'blur' },
-    { validator:checkoutPassword, trigger: 'change' }
+    { required: true, message: "请输入用户重复密码", trigger: "blur" },
+    { validator: checkoutPassword, trigger: "change" },
   ],
-})
+});
 let loginForm = reactive({
-  userName: '',
-  password: '',
-  rePassword: ''
-})
+  userName: "",
+  password: "",
+  rePassword: "",
+});
 
 //注册账号
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate(async (valid, fields) => {
-    console.log('valid', valid)
+  if (!formEl) return;
+  await formEl.validate(async (valid) => {
     if (valid) {
-      let res = await register(loginForm)
+      let res = await register(loginForm);
+      let type = 'warning' as string
       if (res.code == 0) {
-
-        localStorage.setItem('token', JSON.stringify(res.data))
-        router.push('/login')
+        localStorage.setItem("token", JSON.stringify(res.data));
+        router.push("/login");
+        type = 'success'
       }
-    }
-  })
 
-}
+      ElMessage({
+        message: res.message,
+        type,
+        duration:1000
+      });
+    }
+  });
+};
 
 // 重置
 const resetForm = () => {
-  loginForm.userName = ''
-  loginForm.password = ''
-  loginForm.rePassword = ''
-}
+  loginForm.userName = "";
+  loginForm.password = "";
+  loginForm.rePassword = "";
+};
 </script>
 
 <style lang="scss" scoped>

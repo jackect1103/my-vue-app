@@ -1,31 +1,39 @@
+import {DataTypes } from 'sequelize'
 //引入db配置
-import db from '../config/db.js'
-
-//引入sequelize对象
-const Sequelize = db.sequelize
-
+import sequelize from '../config/db.js'
+import { userModel } from '../models/user/index.js'
 //引入数据表模型
-const user = Sequelize.import('../models/user')
+const user = userModel(sequelize, DataTypes)
 
 //自动创建表
 user.sync({ force: false });
 
-class userModel {
-  static async userRegist(data) {
-    console.log('data', data)
+class UserModelService {
+  async userRegist(data) {
     return await user.create({
-      userName: data.userName,
+      userid: data.userid,
+      username: data.userName,
       password: data.password,
     })
   }
 
-  static async getUserInfo(id) {
-    return await user.findOne({
-      where: {
-        id
-      }
-    })
+  async getUserInfo(username,password) {
+    if (username && password) {
+      let res = await user.findOne({
+        where: {
+          username,
+          password
+        }
+      })
+      return res
+    } 
+    return false
+    
+  }
+
+  async getAllUser() {
+    return await user.findAll()
   }
 }
-
-export default userModel
+const userModelService = new UserModelService()
+export default userModelService

@@ -1,4 +1,5 @@
-import userModel from '../../service/user.js'
+import userModelService from '../../service/user.js'
+console.log('userModelService', userModelService.getUserInfo)
 class UserController {
 
 
@@ -8,36 +9,36 @@ class UserController {
    */
   async registerHandle(ctx) {
     const req = ctx.request.body
-    console.log('ctx', ctx)
     if (req.userName && req.password) {
       try {
-        const query = await userModel.getUserInfo(req.id);
+        const query = await userModelService.getUserInfo(req?.userName,req?.password);
         if (query) {
           ctx.response.status = 200;
           ctx.body = {
             code: -1,
-            desc: '用户已存在'
+            message: '用户已存在'
           }
         } else {
+          const allUser = await userModelService.getAllUser()
           const param = {
+            userid:allUser.length + 1,
             password: req.password,
             userName: req.userName
           }
-          const data = await userModule.userRegist(param);
+          await userModelService.userRegist(param);
           ctx.response.status = 200;
           ctx.body = {
             code: 0,
-            desc: '用户注册成功',
-            userInfo: {
-              mobileNo: req.mobileNo
-            }
+            message: '用户注册成功',
+            userInfo: param
           }
         }
       } catch (error) {
+        console.log('error', error)
         ctx.response.status = 416;
         ctx.body = {
           code: -1,
-          desc: '参数不齐全'
+          message: '参数不齐全'
         }
       }
     }
@@ -49,16 +50,27 @@ class UserController {
    * 登录账号
    * @param {*} ctx 
    */
-  loginHandle(ctx) {
-    const body = ctx.request.body
-    console.log('ctx', ctx)
-    ctx.body = {
-      'code': 0,
-      'data': body,
-      "message": "登陆成功!",
-      "msg": "OK!",
-      "subCode": null,
-      "subMsg": null
+  async loginHandle(ctx) {
+    const token = ctx.headers.authorization;
+    console.log('token',  token)
+    const req = ctx.request.body
+    const query = await userModelService.getUserInfo(req?.userName,req?.password);
+    ctx.response.status = 200;
+    if (query) {
+      ctx.body = {
+        code: 0,
+        data: {
+          message:'登录成功',
+          token:'ccnibiufmisojffnasidhjmfjd'
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        data: {
+          message:'登录失败',
+        }
+      }
     }
   }
 }

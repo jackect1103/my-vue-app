@@ -38,8 +38,7 @@ const submitForm = async () => {
   console.log(loginForm)
   let res = await login(loginForm)
   if (res.code == 0) {
-
-    localStorage.setItem('token',JSON.stringify(res.data))
+    localStorage.setItem('token',res.data.token)
     console.log('res', res)
     router.push('/')
   }

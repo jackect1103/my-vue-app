@@ -169,7 +169,7 @@ import { Plus } from '@element-plus/icons-vue'
 import useBaseType from '@/hooks/useBaseType'
 import useElDialog from '@/hooks/useElDialog'
 import useProduct from '@/hooks/useProduct'
-import {PRODUCT_RULE} from '@/contant-type/index'
+import {PRODUCT_RULE} from '@/contant-type/RULES-TYPE/index'
 // import { ElMessage } from 'element-plus'
 
 const {

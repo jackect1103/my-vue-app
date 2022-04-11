@@ -14,11 +14,13 @@ npm install koa
    - OSS
    - ...
 - models - 文件夹主要是我们的数据库模型（ORM），存储数据库映射文件
+- 定义数据表字段模型
    - models
    - index.js - 入口文件
 - controller - 为控制层，主要处理外部请求。调用service层，将service返回的内容整合后返回给调用方
   
 - service - 作为服务层主要做业务逻辑处理，数据处理等，将结果返回给controller层
+- 处理数据库数据
   ```js
     const db = require('../models/')
     const findAllUser = async () => {

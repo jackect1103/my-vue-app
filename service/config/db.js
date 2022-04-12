@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize'
+import {Sequelize,DataTypes} from 'sequelize'
 var sequelize = new Sequelize('test_database','root','QWAszx1103!',{
   host:'106.13.199.161',
   dialect:'mysql',
@@ -20,9 +20,12 @@ var sequelize = new Sequelize('test_database','root','QWAszx1103!',{
 
 try {
   sequelize.authenticate();
-  console.log(' 连接数据库成功.');
+  console.info(' 连接数据库成功.');
 } catch (error) {
   console.error( `连接数据库失败${error}`);
 }
 
-export default sequelize
+export {
+  sequelize,
+  DataTypes
+}

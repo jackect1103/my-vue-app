@@ -24,6 +24,9 @@
         <el-form-item label="重复密码:" prop="rePassword">
           <el-input v-model="loginForm.rePassword" type="password" />
         </el-form-item>
+        <el-form-item label="邮箱:" prop="email">
+          <el-input v-model="loginForm.email" type="email" />
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm(ruleFormRef)"
             >注册用户</el-button
@@ -55,6 +58,7 @@ let checkoutPassword = (rule, value, callback) => {
 let registerRule = reactive({
   userName: [{ required: true, message: "请输入用户名称", trigger: "blur" }],
   password: [{ required: true, message: "请输入用户密码", trigger: "blur" }],
+  email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
   rePassword: [
     { required: true, message: "请输入用户重复密码", trigger: "blur" },
     { validator: checkoutPassword, trigger: "change" },
@@ -64,6 +68,7 @@ let loginForm = reactive({
   userName: "",
   password: "",
   rePassword: "",
+  email: "",
 });
 
 //注册账号

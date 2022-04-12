@@ -1,9 +1,7 @@
-import {DataTypes } from 'sequelize'
-//引入db配置
-import sequelize from '../config/db.js'
+
 import { userModel } from '../models/user/index.js'
 //引入数据表模型
-const user = userModel(sequelize, DataTypes)
+const user = userModel()
 
 //自动创建表
 user.sync({ force: false });
@@ -14,6 +12,7 @@ class UserModelService {
       userid: data.userid,
       username: data.userName,
       password: data.password,
+      email: data.email,
     })
   }
 

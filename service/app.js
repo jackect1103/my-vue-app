@@ -3,6 +3,7 @@ import Koa from 'koa'
 import path from 'path';
 import KoaStatic from 'koa-static'
 import koaBody  from 'koa-body'
+import koajwt from 'koa-jwt'
 
 // 接口
 import loginRouter from './router/login/index.js'
@@ -13,10 +14,12 @@ const __dirname = path.resolve();
 const app = new Koa()
 const PORT = 10086 ;
 
+// 访问静态文件
 app.use(KoaStatic(
   path.join( __dirname,  "/public")
 ))
 
+// 文件上传
 app.use(koaBody({
   multipart:true, // 支持文件上传
   // encoding:'gzip',
@@ -31,10 +34,49 @@ app.use(koaBody({
   }
 }));
 
+// 从url、body 或者 cookie 中获取 token
+app.use(async (ctx, next) => {
+  // url，body 的 token
+  let params = Object.assign({}, ctx.request.query, ctx.request.body);
+  // 请求头的 token
+  let token = ctx.request.header && ctx.request.header.authorization?ctx.request.header.authorization:(params.token?params.token:null)
+   // cookie 的token
+  if(!token) {
+    token = ctx.cookies.get('token') || null;
+  }
+  // 设置头部
+  ctx.request.header.Authorization = `Bearer ${token}`;
+  await next();
+})
 
+// 错误监听
+app.use((ctx, next) => {
+  return next().catch((err) => {
+    console.log('err', err)
+      if(err.status === 401){
+        ctx.status = 401;
+        ctx.body = {
+          data:{
+            code: -1,
+            message:'Protected resource, use Authorization header to get access\n(token可能无效了)'
+          }
+        };
+      }else{
+          throw err;
+      }
+  })
+})
 
-app.use(shopListRouter.routes()).use(shopListRouter.allowedMethods())// 允许http请求的所有方法
-app.use(loginRouter.routes()).use(loginRouter.allowedMethods())// 允许http请求的所有方法
+// token校验 注意：放在路由前面
+app.use(koajwt({
+  secret: 'Gopal_token'
+}).unless({ // 配置白名单
+  // path：不需要鉴权的路由（开放访问的路由）。
+  path: ['/register','/login']
+}))
+
+app.use(loginRouter.routes(),loginRouter.allowedMethods())// 允许http请求的所有方法
+app.use(shopListRouter.routes(),shopListRouter.allowedMethods())// 允许http请求的所有方法
 
 
 app.listen(PORT,() => {

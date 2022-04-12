@@ -74,6 +74,34 @@ cnpm install sequelize mysql mysql2 --save
 > Sequelize 遵从 语义版本控制。 支持 Node v10 及更高版本以便使用 ES6 功能。
 
 
+### 生成token
+- jsonwebtoken，可以生成 token，校验等
+- koa-jwt 中间件 对 jsonwebtoken 进一步的封装，主要用来校验 token
+```js
+Header（头部）
+Payload（负载）
+Signature（签名）
+```
+
+```js
+生成 token 
+const jsonwebtoken = require('jsonwebtoken');
+const jwtSecret = '123456' // 密钥
+const token = null
+
+// 生成签名
+jsonwebtoken.sign({ username: 'rojeryong' }, jwtSecret, { algorithm: 'HS256', expiresIn: '120s' }, function (err, jwtToken) {
+  if (!err) {
+    token = jwtToken
+  }
+});
+username：自定义内容。
+jwtSecret：生成签名的密钥。
+algorithm：加密方式。
+expiresIn：有效期，数字，秒，也可以设置1d代表一天，1h代表一小时...
+function：回调。
+```
+
 ### 可以使用脚手架的方式创建项目
 ```js
 npm install koa-generator -g

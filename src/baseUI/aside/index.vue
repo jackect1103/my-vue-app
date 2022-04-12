@@ -53,7 +53,6 @@ import {
 let router = useRouter()
 let route = useRoute()
 
-console.log('useRouter', useRouter,router,route)
 const navigateTo = (path:string) => {
   router.push(path)
 }

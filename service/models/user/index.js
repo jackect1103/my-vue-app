@@ -1,4 +1,6 @@
-const userModel = function (sequelize, DataTypes) {
+//引入db配置
+import {sequelize,DataTypes} from '../../config/db.js'
+const userModel = function () {
 
   return sequelize.define('user', {
     id: {
@@ -12,6 +14,11 @@ const userModel = function (sequelize, DataTypes) {
       allowNull: false,
       field: 'userid'
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: 'email'
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,9 +30,9 @@ const userModel = function (sequelize, DataTypes) {
       field: 'password'
     }
   },
-  {
-    timestamps: false
-  })
+    {
+      timestamps: false
+    })
 }
 export {
   userModel

@@ -1,9 +1,9 @@
 import axios from 'axios'
+import  { ElMessage } from "element-plus";
 /**
  * vite使用process必须采用这种方式
  * import.meta.env
  */
-console.log('import.meta.env.VITE_APP_BASE_API', import.meta.env)
 
 const process = import.meta.env
 const baseURL: string = (!process.DEV && process.VITE_OPEN_PROXY === 'true')
@@ -33,9 +33,15 @@ install.interceptors.request.use(config => {
  * 响应拦截器
  */
 install.interceptors.response.use(response => {
-  if (response.status === 200) {
+  if (response.data.code === -1) {
+    ElMessage({
+      message: response.data.data.message,
+      type:'warning',
+      duration:1000
+    });
+  } else if (response.status === 200) {
     return Promise.resolve(response.data)
-  }
+  } 
   return response
 }, error => {
   console.log('error', error)

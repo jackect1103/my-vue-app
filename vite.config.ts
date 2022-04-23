@@ -34,8 +34,11 @@ export default defineConfig({
       //假如你要请求https://api.*.com/a/a
       //那么axios的url，可以配置为 /api/a/a
       '/api': {
-        target:'http://localhost:10086',
-        rewrite: (path) => path.replace(/^\/api/, '')
+        target:'http://127.0.0.1:10086',
+        ws: true,  // 这一行很关键  表示是否开启  websocket
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        //false时，以原域名访问服务器；true时，原域名变成服务器域名访问
+        changeOrigin:true
       },
       
     }
@@ -48,6 +51,7 @@ export default defineConfig({
       views: pathResolve('./src/views'), // 设置 `views` 指向 `./src/views` 目录，下同
       components: pathResolve('./src/components'),
       assets: pathResolve('./src/assets'),
+      utils: pathResolve('./src/utils'),
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },

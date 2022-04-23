@@ -59,6 +59,10 @@ const asidebar = [{
     label:'base-type',
     path:'/typescript/base-type'
   }]
+},{
+  id:'8',
+  label:'聊天室',
+  path:'/chatroom-koa',
 }]
 
 export default asidebar

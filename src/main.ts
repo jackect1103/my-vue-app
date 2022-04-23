@@ -6,6 +6,7 @@ import router from './router/index'
 import ArcoVue from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.css';
 
+import socket  from 'utils/socket_1'
 
 
 
@@ -30,6 +31,8 @@ router.beforeEach((to, from, next) => {
 const app = createApp(App)
 app.use(router)
 app.use(ArcoVue);
+
+app.config.globalProperties.$socket = socket
 // router.onReady() 已经替换为 router.isReady()
 // 不带任何参数并返回 Promise
 router.isReady().then(() => app.mount('#app'))

@@ -11,6 +11,8 @@ const vueRouter = () => import('views/vue-router/index.vue')
 const Pinia = () => import('views/pinia/index.vue')
 const propEmit = () => import('views/prop-emit/index.vue')
 
+const ChatRoomKoa = () => import('views/chatroom/index.vue')
+
 const routes:Array<RouteRecordRaw> = [
   {
     path:'/login',
@@ -46,12 +48,16 @@ const routes:Array<RouteRecordRaw> = [
         name: 'prop-emit', 
         component: propEmit
       },
+      {
+        path:'/chatroom-koa',
+        name: 'CHATROOMKOA', 
+        component: ChatRoomKoa
+      }
     ],
     meta:{
       requireAuth:true
     }
   },
-  
   {
     path: "/:params(.*)*",
     component: () => import('views/404.vue')
